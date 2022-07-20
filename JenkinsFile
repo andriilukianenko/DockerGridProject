@@ -3,9 +3,13 @@ pipeline {
     stages {
         stage ("The connect verification") {
            steps {
-              echo "I find Jenkinsfile"
+              echo "I find JenkinsFile"
            }
         }
+ environment {
+        MVN_GOAL = 'clean verify'
+        M2_HOME = '/usr/share/maven'
+    }
         stage ("Build Docker"){
             steps {
               sh 'docker-compose up -d'
@@ -14,9 +18,8 @@ pipeline {
         stage ('Run Test') {
             steps {
                 sh 'curl http://localhost:4444/ui/index.html#/ | jq'
-                   wrap([$class: 'Xvfb', screen: "${env.X_SCREEN}", 'timeout': 15, additionalOptions: '-fbdir /tmp']) 
-                    sh "${env.M2_HOME}/bin/mvn ${env.MVN_GOAL}"
-                '''
+                  sh "${env.M2_HOME}/bin/mvn ${env.MVN_GOAL}"
+               
             }
         }
 
