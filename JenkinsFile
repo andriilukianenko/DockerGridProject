@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    environment {
+        MVN_GOAL = 'clean verify'
+        M2_HOME = '/usr/share/maven'
+    }
     stages {
         stage ("The connect verification") {
            steps {
@@ -8,16 +12,15 @@ pipeline {
         }
         stage ("Build Docker"){
             steps {
-               sh 'docker compose up -d --no-color --wait'
+               sh 'docker compose up -d'
                sh 'docker compose ps'
             }
         }
         stage ('Run Test') {
             steps {
-                sh 'curl http://localhost:4444/ui/index.html#/ | jq'
-                   wrap([$class: 'Xvfb', screen: "${env.X_SCREEN}", 'timeout': 15, additionalOptions: '-fbdir /tmp']) 
+                sh " 'curl http://localhost:4444/ui/index.html#/ | jq'   
                     sh "${env.M2_HOME}/bin/mvn ${env.MVN_GOAL}"
-                
+                "
             }
         }
 
