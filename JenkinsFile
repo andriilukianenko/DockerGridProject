@@ -13,7 +13,7 @@ pipeline {
         }
         stage ('Run Test') {
             steps {
-                sh '''
+                sh 'curl http://localhost:4444/ui/index.html#/ | jq'
                    wrap([$class: 'Xvfb', screen: "${env.X_SCREEN}", 'timeout': 15, additionalOptions: '-fbdir /tmp']) 
                     sh "${env.M2_HOME}/bin/mvn ${env.MVN_GOAL}"
                 '''
