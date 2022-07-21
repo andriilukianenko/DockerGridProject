@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+    agent any {
+            dockerfile {
+                args "-v maven-repository:/home/docker/.m2"
+            }
+    }
     stages {
         stage ("The connect verification") {
            steps {
