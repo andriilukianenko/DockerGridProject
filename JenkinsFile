@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Execute tests') {
              steps {
-                  sh "${env.M2_HOME}/bin/mvn ${env.MVN_GOAL}"
+                  sh "${env.M2_HOME}usr/bin/mvn ${env.MVN_GOAL}"
                  }
              }    
         stage ("Build Docker"){
