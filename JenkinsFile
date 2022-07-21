@@ -1,9 +1,5 @@
 pipeline {
-    agent any {
-            dockerfile {
-                args "-v maven-repository:/home/docker/.m2"
-            }
-    }
+    agent any
     stages {
         stage ("The connect verification") {
            steps {
@@ -18,7 +14,8 @@ pipeline {
         stage ('Run Test') {
             steps {
                 sh '''
-                 sh "${env.M2_HOME}/bin/mvn ${env.MVN_GOAL}"
+                   wrap([$class: 'Xvfb', screen: "${env.X_SCREEN}", 'timeout': 15, additionalOptions: '-fbdir /tmp']) 
+                    sh "${env.M2_HOME}/bin/mvn ${env.MVN_GOAL}"
                 '''
             }
         }
