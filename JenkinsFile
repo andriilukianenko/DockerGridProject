@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage ("The connect verification") {
            steps {
-              echo "I find Jenkinsfile"
+              echo "I find JenkinsFile"
            }
         }
           stage ("Build Docker"){
