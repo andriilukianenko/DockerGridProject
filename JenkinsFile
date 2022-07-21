@@ -1,26 +1,26 @@
 pipeline {
     agent any
-     stages {
+    stages {
         stage ("The connect verification") {
            steps {
-              echo "I find JenkinsFile"
+              echo "I find Jenkinsfile"
            }
         }
-	stage('Execute tests') {
-             steps {
-                 sh '${env.M2_HOME}/bin/mvn ${env.MVN_GOAL}'
-                 }
         stage ("Build Docker"){
             steps {
-               sh 'docker compose up -d'
+              sh 'docker-compose up -d'
             }
         }
         stage ('Run Test') {
             steps {
-                sh  'curl http://localhost:4444/ui/index.html#/ | jq'   
-               }
+                sh '''
+                   wrap([$class: 'Xvfb', screen: "${env.X_SCREEN}", 'timeout': 15, additionalOptions: '-fbdir /tmp']) 
+                    sh "${env.M2_HOME}/bin/mvn ${env.MVN_GOAL}"
+                '''
             }
-          }
+        }
+
+    }
       post {
             always {
             allure([
@@ -34,5 +34,5 @@ pipeline {
              echo 'Finished'
             }
       }
-   }
- }
+
+}
