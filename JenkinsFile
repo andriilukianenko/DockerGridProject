@@ -1,10 +1,6 @@
 pipeline {
     agent any
-    environment {
-        MVN_GOAL = 'clean verify'
-        M2_HOME = '/usr/share/maven'
-    }
-    stages {
+     stages {
         stage ("The connect verification") {
            steps {
               echo "I find JenkinsFile"
