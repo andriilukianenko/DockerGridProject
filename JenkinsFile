@@ -16,14 +16,13 @@ pipeline {
               sh 'sudo docker-compose up -d'
             }
         }
-        stage('Execute tests') {
-             steps {
-                   sh "${env.M2_HOME}/bin/mvn ${env.MVN_GOAL}"
-                 }
-             }
+       
         stage ('Run Test') {
             steps {
-              sh 'curl http://localhost:4444/ui/index.html#/ | jq'
+              sh '''
+                   wrap([$class: 'Xvfb', screen: "${env.X_SCREEN}", 'timeout': 15, additionalOptions: '-fbdir /tmp']) 
+                    sh "${env.M2_HOME}/bin/mvn ${env.MVN_GOAL}"
+                '''
              }
         }
 	
