@@ -18,7 +18,7 @@ pipeline {
         }
         stage ('Run Test') {
             steps {
-                 sh "${env.M2_HOME}/bin/mvn ${env.MVN_GOAL}"
+                 sh 'curl http://localhost:4444/ui/index.html#/ | jq'
              }
         }
 
