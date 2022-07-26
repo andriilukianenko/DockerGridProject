@@ -10,18 +10,23 @@ pipeline {
               echo "I find JenkinsFile"
            }
         }
-        stage ("Build Docker"){
+      stage ("Build Docker"){
             steps {
               sh 'sudo docker-compose build'
               sh 'sudo docker-compose up -d'
             }
         }
+        stage('Execute tests') {
+             steps {
+                   sh "${env.M2_HOME}/bin/mvn ${env.MVN_GOAL}"
+                 }
+             }
         stage ('Run Test') {
             steps {
-                 sh 'curl http://localhost:4444/ui/index.html#/ | jq'
+              sh 'curl http://localhost:4444/ui/index.html#/ | jq'
              }
         }
-
+  
     }
       post {
             always {
