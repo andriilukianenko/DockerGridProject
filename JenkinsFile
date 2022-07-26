@@ -14,9 +14,9 @@ pipeline {
         }
         stage ('Run Test') {
             steps {
-                sh '''
+                sh "
                  sh "${env.M2_HOME}/bin/mvn ${env.MVN_GOAL}"
-                '''
+                "
             }
         }
 
