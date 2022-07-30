@@ -37,7 +37,7 @@ pipeline {
              reportBuildPolicy: 'ALWAYS',
              results: [[path: 'target/allure-results']]
             ])
-             sh 'docker-compose down'
+             sh 'sudo docker-compose down'
              echo 'Finished'
             }
       }
