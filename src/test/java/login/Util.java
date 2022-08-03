@@ -16,9 +16,9 @@ public final class Util  {
 
 
         if (isUnix() && ("chrome").equalsIgnoreCase(driverName)) {
-            System.setProperty("chmod 777 webdriver.chrome.driver", "src/test/resources/driver/chromedriver");
+            System.setProperty("webdriver.chrome.driver", "src/test/resources/driver/chromedriver");
         } else if (isUnix() && ("firefox").equalsIgnoreCase(driverName)) {
-            System.setProperty("chmod 777 webdriver.gecko.driver", "src/test/resources/driver/geckodriver");
+            System.setProperty("webdriver.gecko.driver", "src/test/resources/driver/geckodriver");
         } else if (isWindows() && ("chrome").equalsIgnoreCase(driverName)) {
             System.setProperty("webdriver.chrome.driver", "src/test/resources/driver/chromedriver.exe");
         } else if (isWindows() && ("firefox").equalsIgnoreCase(driverName))  {
