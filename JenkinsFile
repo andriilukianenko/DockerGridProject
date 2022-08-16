@@ -23,7 +23,7 @@ pipeline {
              }
         stage ('Run Test') {
             steps {
-              sh 'curl http://localhost:4444/ui/index.html#/ | jq'
+              sh 'curl http://localhost:4444/ui/index.html#/ '
              }
         }
   
