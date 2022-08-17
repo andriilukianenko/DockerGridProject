@@ -16,10 +16,9 @@ public class BaseTest {
 
     protected WebDriver driver;
 
-    
-    @BeforeClass
     @Parameters("browser")
-    
+    @BeforeClass
+
     public void setup(String driverName) throws MalformedURLException {
         DesiredCapabilities cap = new DesiredCapabilities();
         URL url = new URL("http://localhost:4444/wd/hub");
@@ -28,6 +27,7 @@ public class BaseTest {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         }
+
 
         @AfterClass
         public void close () {

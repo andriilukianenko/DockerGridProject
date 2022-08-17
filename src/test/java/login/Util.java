@@ -2,6 +2,7 @@ package login;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 
@@ -14,9 +15,11 @@ public final class Util  {
 
     public static WebDriver setEnvironmentAndGetDriver(String driverName) {
 
+        ChromeOptions options = new ChromeOptions();
 
         if (isUnix() && ("chrome").equalsIgnoreCase(driverName)) {
-            System.setProperty("webdriver.chrome.driver", "src/test/resources/driver/chromedriver");
+            System.setProperty(" webdriver.chrome.driver", "src/test/resources/driver/chromedriver");
+            options.setBinary("/usr/bin/google-chrome");
         } else if (isUnix() && ("firefox").equalsIgnoreCase(driverName)) {
             System.setProperty("webdriver.gecko.driver", "src/test/resources/driver/geckodriver");
         } else if (isWindows() && ("chrome").equalsIgnoreCase(driverName)) {
@@ -32,7 +35,6 @@ public final class Util  {
         }
         return null;
     }
-
 
         private static boolean isUnix() {
             return (OS.contains("nix")
