@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+    agent {
+            docker {
+              args '-v $HOME:/home/jenkins'
+            }
+        }
     environment {
         MVN_GOAL = 'clean verify'
         M2_HOME = '/usr/share/maven'
