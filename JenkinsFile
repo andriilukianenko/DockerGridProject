@@ -1,5 +1,8 @@
 pipeline {
-    agent any
+     agent {
+                dockerfile {
+                    args "-v maven-repository:/home/docker/.m2"
+                }
 
     environment {
         MVN_GOAL = 'clean verify'
