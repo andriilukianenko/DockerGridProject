@@ -1,8 +1,6 @@
 pipeline {
-    agent {
-           docker {
-           image 'node:16.13.1-alpine' }
-                  }
+    agent any
+
     environment {
         MVN_GOAL = 'clean verify'
         M2_HOME = '/usr/share/maven'
@@ -14,6 +12,7 @@ pipeline {
            }
         }
       stage ("Build Docker"){
+            agent {image 'adoptopenjdk/maven-openjdk11'}
             steps {
               sh 'sudo docker-compose build'
               sh 'sudo docker-compose up -d'

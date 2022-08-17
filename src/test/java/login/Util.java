@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 
 public final class Util  {
@@ -16,12 +17,13 @@ public final class Util  {
     public static WebDriver setEnvironmentAndGetDriver(String driverName) {
 
         ChromeOptions options = new ChromeOptions();
-
+        FirefoxOptions options1 = new FirefoxOptions();
         if (isUnix() && ("chrome").equalsIgnoreCase(driverName)) {
             System.setProperty(" webdriver.chrome.driver", "src/test/resources/driver/chromedriver");
             options.setBinary("/usr/bin/google-chrome");
         } else if (isUnix() && ("firefox").equalsIgnoreCase(driverName)) {
             System.setProperty("webdriver.gecko.driver", "src/test/resources/driver/geckodriver");
+            options1.setBinary("/usr/local/firefox/bin/firefox");
         } else if (isWindows() && ("chrome").equalsIgnoreCase(driverName)) {
             System.setProperty("webdriver.chrome.driver", "src/test/resources/driver/chromedriver.exe");
         } else if (isWindows() && ("firefox").equalsIgnoreCase(driverName))  {
